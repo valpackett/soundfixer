@@ -1,0 +1,66 @@
+body, html {
+	background: rgb(240, 240, 240);
+	color: rgb(60, 60, 60);
+}
+* {
+	font-family: sans-serif;
+	user-select: none;
+}
+
+#elements-pane {
+	width: 360px;
+}
+header {
+	display: flex;
+	align-items: center;
+	padding: 0.1rem 1rem;
+}
+header :first-child {
+	flex: 1;
+}
+header h1 {
+	font-size: 1.3rem;
+}
+header img {
+	width: 1.8rem;
+	height: 1.8rem;
+	margin-left: 0.8em;
+}
+#elements-list, .info {
+	background: white;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+#elements-list li {
+	margin: 0;
+	padding: 1rem;
+	border-bottom:1px solid rgb(240, 240, 240);
+}
+#elements-list li:last-child {
+	border-bottom-width: 0;
+}
+.element-label {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 280px;
+}
+label {
+	display: flex;
+	padding: 0.2rem 0;
+}
+label:first-of-type {
+	margin-top: 0.2rem;
+}
+label span {
+	min-width: 10%;
+}
+label input {
+	flex: 1;
+}
+.info {
+	font-size: 0.8em;
+	color: #666;
+	padding: 1rem;
+}
