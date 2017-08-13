@@ -6,6 +6,8 @@ No more "[Plug your headphones only halfway into the jack](https://news.ycombina
 
 (Unfortunately, doesn't work on all websites — specifically, we're not allowed to use the Web Audio API from a cross-domain `<audio>` source. Thankfully, YouTube is not cross-domain!)
 
+(Doesn't seem to work in Chromium/Opera currently because of permission issues. Even when allowing all URLs.)
+
 ## Contributing
 
 By participating in this project you agree to follow the [Contributor Code of Conduct](http://contributor-covenant.org/version/1/4/) and to release your contributions under the Unlicense.
