@@ -1,6 +1,6 @@
 # SoundFixer [![unlicense](https://img.shields.io/badge/un-license-green.svg?style=flat)](http://unlicense.org)
 
-![Screenshot](https://addons.cdn.mozilla.net/user-media/previews/full/186/186984.png?modified=1502643887)
+![Screenshot](https://addons.cdn.mozilla.net/user-media/previews/full/222/222279.png?modified=1563218266)
 
 a WebExtension that lets you fix annoying sound problems on the web (e.g. in YouTube videos): sound in one channel only, too quiet even at maximum volume, too loud even at minimum volume.
 
@@ -14,11 +14,11 @@ No more "[Plug your headphones only halfway into the jack](https://news.ycombina
 
 ## Contributing
 
-By participating in this project you agree to follow the [Contributor Code of Conduct](http://contributor-covenant.org/version/1/4/) and to release your contributions under the Unlicense.
+By participating in this project you agree to follow the [Contributor Code of Conduct](https://contributor-covenant.org/version/1/4/) and to release your contributions under the Unlicense.
 
 [The list of contributors is available on GitHub](https://github.com/myfreeweb/soundfixer/graphs/contributors).
 
 ## License
 
 This is free and unencumbered software released into the public domain.  
-For more information, please refer to the `UNLICENSE` file or [unlicense.org](http://unlicense.org).
+For more information, please refer to the `UNLICENSE` file or [unlicense.org](https://unlicense.org).
