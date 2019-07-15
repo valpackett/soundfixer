@@ -61,7 +61,7 @@ label span:first-child {
 	min-width: 13%;
 	text-align: right;
 }
-label input {
+label input:not([type=checkbox]) {
 	flex: 1;
 }
 .info {
