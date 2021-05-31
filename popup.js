@@ -82,7 +82,7 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 				pan.parentElement.querySelector('.target').innerHTML = '' + pan.value
 			})
 			const mono = node.querySelector('.element-mono')
-			mono.value = settings.mono || false
+			mono.checked = settings.mono || false
 			mono.addEventListener('change', _ => {
 				applySettings(fid, elid, { mono: mono.checked })
 			})
