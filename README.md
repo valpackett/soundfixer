@@ -16,7 +16,7 @@ No more "[Plug your headphones only halfway into the jack](https://news.ycombina
 
 By participating in this project you agree to follow the [Contributor Code of Conduct](https://contributor-covenant.org/version/1/4/) and to release your contributions under the Unlicense.
 
-[The list of contributors is available on GitHub](https://github.com/myfreeweb/soundfixer/graphs/contributors).
+[The list of contributors is available on GitHub](https://github.com/unrelentingtech/soundfixer/graphs/contributors).
 
 ## License
 
