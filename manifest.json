@@ -25,7 +25,22 @@
       {
         "dark": "icon.svg",
         "light": "icon-inv.svg",
+        "size": 64
+      },
+      {
+        "dark": "icon.svg",
+        "light": "icon-inv.svg",
         "size": 48
+      },
+      {
+        "dark": "icon.svg",
+        "light": "icon-inv.svg",
+        "size": 32
+      },
+      {
+        "dark": "icon.svg",
+        "light": "icon-inv.svg",
+        "size": 16
       }
     ],
     "browser_style": true
