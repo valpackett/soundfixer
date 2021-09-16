@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "SoundFixer",
   "author": "unrelenting.technology",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Lets you fix annoying sound problems in YouTube videos and such. Like audio in one channel only, too quiet or too loud",
   "applications": {
     "gecko": {
