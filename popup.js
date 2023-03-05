@@ -16,6 +16,7 @@ function applySettings (fid, elid, newSettings) {
 			el.xSoundFixerSource.connect(el.xSoundFixerGain)
 			el.xSoundFixerGain.connect(el.xSoundFixerPan)
 			el.xSoundFixerPan.connect(el.xSoundFixerContext.destination)
+			el.xSoundFixerOriginalChannels = el.xSoundFixerContext.destination.channelCount
 		}
 		const newSettings = ${JSON.stringify(newSettings)}
 		if (newSettings.gain) {
@@ -24,9 +25,13 @@ function applySettings (fid, elid, newSettings) {
 		if (newSettings.pan) {
 			el.xSoundFixerPan.pan.value = newSettings.pan
 		}
+		if ('mono' in newSettings) {
+			el.xSoundFixerContext.destination.channelCount = newSettings.mono ? 1 : el.xSoundFixerOriginalChannels
+		}
 		el.xSoundFixerSettings = {
 			gain: el.xSoundFixerGain.gain.value,
-			pan: el.xSoundFixerPan.pan.value
+			pan: el.xSoundFixerPan.pan.value,
+			mono: el.xSoundFixerContext.destination.channelCount == 1,
 		}
 	})()` })
 }
@@ -75,6 +80,11 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 				applySettings(fid, elid, { pan: pan.value })
 				pan.title = '' + pan.value
 				pan.parentElement.querySelector('.target').innerHTML = '' + pan.value
+			})
+			const mono = node.querySelector('.element-mono')
+			mono.value = settings.mono || false
+			mono.addEventListener('change', _ => {
+				applySettings(fid, elid, { mono: mono.checked })
 			})
 			elementsList.appendChild(node)
 		}
