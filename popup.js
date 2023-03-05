@@ -76,6 +76,6 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 		}
 	}
 	if (elementsList.innerHTML === '') {
-		elementsList.innerHTML = '<li>No audio/video found in the current tab</li>'
+		elementsList.innerHTML = '<li>No audio/video found in the current tab. Note that some websites do not work because of security restrictions.</li>'
 	}
 })
