@@ -4,7 +4,7 @@ body, html {
 	margin: 0 auto;
 }
 * {
-	font-family: sans-serif;
+	font-family: system-ui;
 	user-select: none;
 }
 
@@ -26,6 +26,7 @@ header img {
 	width: 1.8rem;
 	height: 1.8rem;
 	margin-left: 0.8em;
+	vertical-align: middle;
 }
 #elements-list, .info {
 	background: white;
@@ -35,7 +36,7 @@ header img {
 }
 #elements-list li {
 	margin: 0;
-	padding: 1rem;
+	padding: 1rem 1rem 0.6rem;
 	border-bottom:1px solid rgb(240, 240, 240);
 }
 #elements-list li:last-child {
@@ -63,10 +64,11 @@ li > label:first-of-type {
 }
 label span {
 	min-width: 10%;
-	padding: 0 0.3rem;
+	padding: 0 0.3rem 0.1rem;
+	line-height: 2rem;
 }
 label span:first-child {
-	min-width: 15%;
+	min-width: 3.6rem;
 	text-align: right;
 }
 label input:not([type=checkbox]) {
