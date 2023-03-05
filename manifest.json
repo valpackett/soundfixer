@@ -10,21 +10,24 @@
     }
   },
   "icons": {
-    "128": "icon.svg",
-    "48": "icon48.png",
-    "32": "icon.svg"
+    "96": "icon.svg",
+    "48": "icon.svg"
   },
   "permissions": [
     "activeTab",
     "webNavigation"
   ],
   "browser_action": {
-    "default_icon": {
-      "128": "icon.svg",
-      "48": "icon48.png"
-    },
+    "default_icon": "icon.svg",
     "default_title": "SoundFixer",
     "default_popup": "popup.html",
+    "theme_icons": [
+      {
+        "dark": "icon.svg",
+        "light": "icon-inv.svg",
+        "size": 48
+      }
+    ],
     "browser_style": true
   }
 }
