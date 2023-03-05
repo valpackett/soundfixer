@@ -1,6 +1,7 @@
 body, html {
 	background: rgb(240, 240, 240);
 	color: rgb(60, 60, 60);
+	margin: 0 auto;
 }
 * {
 	font-family: sans-serif;
@@ -8,7 +9,7 @@ body, html {
 }
 
 #elements-pane {
-	width: 360px;
+	max-width: 360px;
 }
 header {
 	display: flex;
