@@ -12,6 +12,8 @@ function applySettings (fid, elid, newSettings) {
 			el.xSoundFixerContext = new AudioContext()
 			el.xSoundFixerGain = el.xSoundFixerContext.createGain()
 			el.xSoundFixerPan = el.xSoundFixerContext.createStereoPanner()
+			el.xSoundFixerSplit = el.xSoundFixerContext.createChannelSplitter(2)
+			el.xSoundFixerMerge = el.xSoundFixerContext.createChannelMerger(2)
 			el.xSoundFixerSource = el.xSoundFixerContext.createMediaElementSource(el)
 			el.xSoundFixerSource.connect(el.xSoundFixerGain)
 			el.xSoundFixerGain.connect(el.xSoundFixerPan)
@@ -28,10 +30,24 @@ function applySettings (fid, elid, newSettings) {
 		if ('mono' in newSettings) {
 			el.xSoundFixerContext.destination.channelCount = newSettings.mono ? 1 : el.xSoundFixerOriginalChannels
 		}
+		if ('flip' in newSettings) {
+			el.xSoundFixerFlipped = newSettings.flip
+			el.xSoundFixerMerge.disconnect()
+			el.xSoundFixerPan.disconnect()
+			if (el.xSoundFixerFlipped) {
+				el.xSoundFixerPan.connect(el.xSoundFixerSplit)
+				el.xSoundFixerSplit.connect(el.xSoundFixerMerge, 0, 1)
+				el.xSoundFixerSplit.connect(el.xSoundFixerMerge, 1, 0)
+				el.xSoundFixerMerge.connect(el.xSoundFixerContext.destination)
+			} else {
+				el.xSoundFixerPan.connect(el.xSoundFixerContext.destination)
+			}
+		}
 		el.xSoundFixerSettings = {
 			gain: el.xSoundFixerGain.gain.value,
 			pan: el.xSoundFixerPan.pan.value,
 			mono: el.xSoundFixerContext.destination.channelCount == 1,
+			flip: el.xSoundFixerFlipped,
 		}
 	})()` })
 }
@@ -85,6 +101,11 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 			mono.checked = settings.mono || false
 			mono.addEventListener('change', _ => {
 				applySettings(fid, elid, { mono: mono.checked })
+			})
+			const flip = node.querySelector('.element-flip')
+			flip.checked = settings.flip || false
+			flip.addEventListener('change', _ => {
+				applySettings(fid, elid, { flip: flip.checked })
 			})
 			elementsList.appendChild(node)
 		}
