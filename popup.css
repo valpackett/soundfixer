@@ -55,6 +55,11 @@ label:first-of-type {
 }
 label span {
 	min-width: 10%;
+	padding: 0 0.3rem;
+}
+label span:first-child {
+	min-width: 13%;
+	text-align: right;
 }
 label input {
 	flex: 1;

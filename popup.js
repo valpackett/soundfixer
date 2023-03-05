@@ -62,15 +62,19 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 			node.querySelector('.element-label').innerHTML = `${el.type} in frame ${fid}`
 			const gain = node.querySelector('.element-gain')
 			gain.value = settings.gain || 1
+			gain.parentElement.querySelector('.target').innerHTML = '' + gain.value
 			gain.addEventListener('change', _ => {
 				applySettings(fid, elid, { gain: gain.value })
 				gain.title = '' + gain.value
+				gain.parentElement.querySelector('.target').innerHTML = '' + gain.value
 			})
 			const pan = node.querySelector('.element-pan')
 			pan.value = settings.pan || 0
+			pan.parentElement.querySelector('.target').innerHTML = '' + pan.value
 			pan.addEventListener('change', _ => {
 				applySettings(fid, elid, { pan: pan.value })
 				pan.title = '' + pan.value
+				pan.parentElement.querySelector('.target').innerHTML = '' + pan.value
 			})
 			elementsList.appendChild(node)
 		}
