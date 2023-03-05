@@ -1,5 +1,5 @@
 body, html {
-	background: rgb(240, 240, 240);
+	background: rgb(235, 235, 235);
 	color: rgb(60, 60, 60);
 	margin: 0 auto;
 }
@@ -29,7 +29,7 @@ header img {
 	vertical-align: middle;
 }
 #elements-list, .info {
-	background: white;
+	background: rgb(250, 250, 250);
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -37,7 +37,7 @@ header img {
 #elements-list li {
 	margin: 0;
 	padding: 1rem 1rem 0.6rem;
-	border-bottom:1px solid rgb(240, 240, 240);
+	border-bottom: 1px solid rgb(235, 235, 235);
 }
 #elements-list li:last-child {
 	border-bottom-width: 0;
@@ -78,4 +78,23 @@ label input:not([type=checkbox]) {
 	font-size: 0.8em;
 	color: #666;
 	padding: 1rem;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+	body, html {
+		background: rgb(60, 60, 60);
+		color: rgb(240, 240, 240);
+	}
+	header img {
+		filter: invert();
+	}
+	#elements-list, .info {
+		background: rgb(40, 40, 40);
+	}
+	#elements-list li {
+		border-color: rgb(70, 70, 70);
+	}
+	.info {
+		color: #aaa;
+	}
 }
