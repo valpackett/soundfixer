@@ -1,10 +1,12 @@
-# SoundFixer [![unlicense](https://img.shields.io/badge/un-license-green.svg?style=flat)](http://unlicense.org)
+# SoundFixer [![unlicense](https://img.shields.io/badge/un-license-green.svg?style=flat)](https://unlicense.org)
 
-![Screenshot](https://addons.cdn.mozilla.net/user-media/previews/full/222/222279.png?modified=1563218266)
+![Screenshot](https://addons.mozilla.org/user-media/previews/full/279/279487.png?modified=1677998068)
 
 a WebExtension that lets you fix annoying sound problems on the web (e.g. in YouTube videos): sound in one channel only, too quiet even at maximum volume, too loud even at minimum volume.
 
-<a href="https://addons.mozilla.org/firefox/addon/soundfixer/"><img alt="Get for Firefox" src="https://addons.cdn.mozilla.net/static/img/addons-buttons/AMO-button_1.png" width="172" height="60"></a>
+[![Mozilla Add-on](https://img.shields.io/amo/users/soundfixer?color=rebeccapurple&logo=firefox&logoColor=white&style=for-the-badge)](https://addons.mozilla.org/firefox/addon/soundfixer/)
+
+(NOTE: this SoundFixer only exists for Firefox! Anything uploaded to other browsers' extension stores is not mine! Please don't report bugs to me if you use those.)
 
 No more "[Plug your headphones only halfway into the jack](https://news.ycombinator.com/item?id=11912213)" :D
 
@@ -15,8 +17,6 @@ No more "[Plug your headphones only halfway into the jack](https://news.ycombina
 ## Contributing
 
 By participating in this project you agree to follow the [Contributor Code of Conduct](https://contributor-covenant.org/version/1/4/) and to release your contributions under the Unlicense.
-
-[The list of contributors is available on GitHub](https://github.com/unrelentingtech/soundfixer/graphs/contributors).
 
 ## License
 
