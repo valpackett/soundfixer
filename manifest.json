@@ -3,7 +3,7 @@
   "name": "SoundFixer",
   "author": "unrelenting.technology",
   "version": "1.0.0",
-  "description": "Lets you fix annoying sound problems (e.g. in YouTube videos) — audio in one channel only, too quiet or too loud",
+  "description": "Lets you fix annoying sound problems in YouTube videos and such. Like audio in one channel only, too quiet or too loud",
   "applications": {
     "gecko": {
       "id": "soundfixer@unrelenting.technology"
