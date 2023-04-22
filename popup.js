@@ -85,20 +85,44 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 			node.querySelector('li').dataset.elid = elid
 			node.querySelector('.element-label').textContent = `${el.type.charAt(0).toUpperCase() + el.type.slice(1)} in frame ${fid}`
 			const gain = node.querySelector('.element-gain')
+			const gainNumberInput = node.querySelector('.element-gain-num')
 			gain.value = settings.gain || 1
-			gain.parentElement.querySelector('.target').textContent = '' + gain.value
-			gain.addEventListener('input', _ => {
-				applySettings(fid, elid, { gain: gain.value })
-				gain.title = '' + gain.value
-				gain.parentElement.querySelector('.target').textContent = '' + gain.value
+			gain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
+
+			gain.addEventListener('input', function () {
+				// We used a function expression thus gain === this
+				applySettings(fid, elid, { gain: this.value })
+				this.title = '' + this.value
+				this.parentElement.querySelector('.element-gain-num').value = '' + this.value
+			})
+			gainNumberInput.addEventListener('input', function () {
+				if (+this.value > +this.getAttribute('max'))
+					this.value = this.getAttribute('max')
+				if (+this.value < +this.getAttribute('min'))
+					this.value = this.getAttribute('min')
+				
+				applySettings(fid, elid, { gain: this.value })
+				this.title = '' + this.value
+				this.parentElement.querySelector('.element-gain').value = '' + this.value
 			})
 			const pan = node.querySelector('.element-pan')
+			const panNumberInput = node.querySelector('.element-pan-num')
 			pan.value = settings.pan || 0
-			pan.parentElement.querySelector('.target').textContent = '' + pan.value
-			pan.addEventListener('input', _ => {
-				applySettings(fid, elid, { pan: pan.value })
-				pan.title = '' + pan.value
-				pan.parentElement.querySelector('.target').textContent = '' + pan.value
+			pan.parentElement.querySelector('.element-pan-num').value = '' + pan.value
+			pan.addEventListener('input', function () {
+				applySettings(fid, elid, { pan: this.value })
+				this.title = '' + this.value
+				this.parentElement.querySelector('.element-pan-num').value = '' + this.value
+			})
+			panNumberInput.addEventListener('input', function () {
+				if (+this.value > +this.getAttribute('max'))
+					this.value = this.getAttribute('max')
+				if (+this.value < +this.getAttribute('min'))
+					this.value = this.getAttribute('min')
+				
+				applySettings(fid, elid, { pan: this.value })
+				this.title = '' + this.value
+				this.parentElement.querySelector('.element-pan').value = '' + this.value
 			})
 			const mono = node.querySelector('.element-mono')
 			mono.checked = settings.mono || false
@@ -118,41 +142,41 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 		elementsList.innerHTML = '<li>No audio/video found in the current tab. Note that some websites do not work because of cross-domain security restrictions.</li>'
 	}
 	if (elCount > 1) {
-			const node = document.importNode(elementsTpl.content, true)
-			node.querySelector('.element-label').textContent = `All media on the page`
-			const gain = node.querySelector('.element-gain')
-			gain.value = 1
-			gain.parentElement.querySelector('.target').textContent = '' + gain.value
-			gain.addEventListener('input', _ => {
-				for (const [fid, els] of frameMap) {
-					for (const [elid, el] of els) {
-						applySettings(fid, elid, { gain: gain.value })
-						const egain = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-gain`)
-						egain.value = gain.value
-						egain.title = '' + gain.value
-						egain.parentElement.querySelector('.target').textContent = '' + gain.value
-					}
+		const node = document.importNode(elementsTpl.content, true)
+		node.querySelector('.element-label').textContent = `All media on the page`
+		const gain = node.querySelector('.element-gain')
+		gain.value = 1
+		gain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
+		gain.addEventListener('input', _ => {
+			for (const [fid, els] of frameMap) {
+				for (const [elid, el] of els) {
+					applySettings(fid, elid, { gain: gain.value })
+					const egain = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-gain`)
+					egain.value = gain.value
+					egain.title = '' + gain.value
+					egain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
 				}
-				gain.title = '' + gain.value
-				gain.parentElement.querySelector('.target').textContent = '' + gain.value
-			})
-			const pan = node.querySelector('.element-pan')
-			pan.value = 0
-			pan.parentElement.querySelector('.target').textContent = '' + pan.value
-			pan.addEventListener('input', _ => {
-				for (const [fid, els] of frameMap) {
-					for (const [elid, el] of els) {
-						applySettings(fid, elid, { pan: pan.value })
-						const epan = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-pan`)
-						epan.value = pan.value
-						epan.title = '' + pan.value
-						epan.parentElement.querySelector('.target').textContent = '' + pan.value
-					}
+			}
+			gain.title = '' + gain.value
+			gain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
+		})
+		const pan = node.querySelector('.element-pan')
+		pan.value = 0
+		pan.parentElement.querySelector('.element-gain-pan').value = '' + pan.value
+		pan.addEventListener('input', _ => {
+			for (const [fid, els] of frameMap) {
+				for (const [elid, el] of els) {
+					applySettings(fid, elid, { pan: pan.value })
+					const epan = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-pan`)
+					epan.value = pan.value
+					epan.title = '' + pan.value
+					epan.parentElement.querySelector('.element-gain-pan').value = '' + pan.value
 				}
-				pan.title = '' + pan.value
-				pan.parentElement.querySelector('.target').textContent = '' + pan.value
-			})
-			node.querySelector('.checkboxes').remove()
-			elementsList.prepend(node)
+			}
+			pan.title = '' + pan.value
+			pan.parentElement.querySelector('.element-gain-pan').value = '' + pan.value
+		})
+		node.querySelector('.checkboxes').remove()
+		elementsList.prepend(node)
 	}
 })
