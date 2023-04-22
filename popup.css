@@ -98,3 +98,7 @@ label input:not([type=checkbox]) {
 		color: #aaa;
 	}
 }
+.element-gain-num,
+.element-pan-num {
+    width: 15%;
+}
