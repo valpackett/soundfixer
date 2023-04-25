@@ -92,7 +92,6 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 			gain.addEventListener('input', function () {
 				// We used a function expression thus gain === this
 				applySettings(fid, elid, { gain: this.value })
-				this.title = '' + this.value
 				this.parentElement.querySelector('.element-gain-num').value = '' + this.value
 			})
 			gainNumberInput.addEventListener('input', function () {
@@ -102,7 +101,6 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 					this.value = this.getAttribute('min')
 				
 				applySettings(fid, elid, { gain: this.value })
-				this.title = '' + this.value
 				this.parentElement.querySelector('.element-gain').value = '' + this.value
 			})
 			const pan = node.querySelector('.element-pan')
@@ -111,7 +109,6 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 			pan.parentElement.querySelector('.element-pan-num').value = '' + pan.value
 			pan.addEventListener('input', function () {
 				applySettings(fid, elid, { pan: this.value })
-				this.title = '' + this.value
 				this.parentElement.querySelector('.element-pan-num').value = '' + this.value
 			})
 			panNumberInput.addEventListener('input', function () {
@@ -121,7 +118,6 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 					this.value = this.getAttribute('min')
 				
 				applySettings(fid, elid, { pan: this.value })
-				this.title = '' + this.value
 				this.parentElement.querySelector('.element-pan').value = '' + this.value
 			})
 			const mono = node.querySelector('.element-mono')
@@ -153,11 +149,9 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 					applySettings(fid, elid, { gain: gain.value })
 					const egain = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-gain`)
 					egain.value = gain.value
-					egain.title = '' + gain.value
 					egain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
 				}
 			}
-			gain.title = '' + gain.value
 			gain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
 		})
 		const pan = node.querySelector('.element-pan')
@@ -169,11 +163,9 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 					applySettings(fid, elid, { pan: pan.value })
 					const epan = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-pan`)
 					epan.value = pan.value
-					epan.title = '' + pan.value
 					epan.parentElement.querySelector('.element-gain-pan').value = '' + pan.value
 				}
 			}
-			pan.title = '' + pan.value
 			pan.parentElement.querySelector('.element-gain-pan').value = '' + pan.value
 		})
 		node.querySelector('.checkboxes').remove()
