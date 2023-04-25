@@ -138,37 +138,37 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 		elementsList.innerHTML = '<li>No audio/video found in the current tab. Note that some websites do not work because of cross-domain security restrictions.</li>'
 	}
 	if (elCount > 1) {
-		const node = document.importNode(elementsTpl.content, true)
-		node.querySelector('.element-label').textContent = `All media on the page`
-		const gain = node.querySelector('.element-gain')
-		gain.value = 1
-		gain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
-		gain.addEventListener('input', _ => {
-			for (const [fid, els] of frameMap) {
-				for (const [elid, el] of els) {
-					applySettings(fid, elid, { gain: gain.value })
-					const egain = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-gain`)
-					egain.value = gain.value
-					egain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
-				}
-			}
+			const node = document.importNode(elementsTpl.content, true)
+			node.querySelector('.element-label').textContent = `All media on the page`
+			const gain = node.querySelector('.element-gain')
+			gain.value = 1
 			gain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
-		})
-		const pan = node.querySelector('.element-pan')
-		pan.value = 0
-		pan.parentElement.querySelector('.element-gain-pan').value = '' + pan.value
-		pan.addEventListener('input', _ => {
-			for (const [fid, els] of frameMap) {
-				for (const [elid, el] of els) {
-					applySettings(fid, elid, { pan: pan.value })
-					const epan = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-pan`)
-					epan.value = pan.value
-					epan.parentElement.querySelector('.element-gain-pan').value = '' + pan.value
+			gain.addEventListener('input', _ => {
+				for (const [fid, els] of frameMap) {
+					for (const [elid, el] of els) {
+						applySettings(fid, elid, { gain: gain.value })
+						const egain = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-gain`)
+						egain.value = gain.value
+						egain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
+					}
 				}
-			}
+				gain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
+			})
+			const pan = node.querySelector('.element-pan')
+			pan.value = 0
 			pan.parentElement.querySelector('.element-gain-pan').value = '' + pan.value
-		})
-		node.querySelector('.checkboxes').remove()
-		elementsList.prepend(node)
+			pan.addEventListener('input', _ => {
+				for (const [fid, els] of frameMap) {
+					for (const [elid, el] of els) {
+						applySettings(fid, elid, { pan: pan.value })
+						const epan = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-pan`)
+						epan.value = pan.value
+						epan.parentElement.querySelector('.element-gain-pan').value = '' + pan.value
+					}
+				}
+				pan.parentElement.querySelector('.element-gain-pan').value = '' + pan.value
+			})
+			node.querySelector('.checkboxes').remove()
+			elementsList.prepend(node)
 	}
 })
