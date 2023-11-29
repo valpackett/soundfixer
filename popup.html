@@ -9,7 +9,6 @@
 		<a href="https://github.com/valpackett/soundfixer" class="info-opener" target="_blank"><img src="github.svg" alt="" title="View on GitHub"></a>
 	</header>
 	<template id="elements-tpl">
-		<li>
 			<div class="element-label"></div>
 			<label>
 				<span>Gain</span>
@@ -31,10 +30,14 @@
 					<input type="checkbox" class="element-flip" />
 				</label>
 			</div>
-		</li>
 	</template>
-	<ul id="elements-list">
-	</ul>
+	<div id="all-elements">
+	</div>
+	<details id="individual-elements">
+		<summary>Control individual media elements</summary>
+		<ul id="elements-list">
+		</ul>
+	</details>
 	<p class="info">
 		Note: if you get silence after touching a control, that means this extension can't do anything on this site
 		because the site uses cross-domain media. Because Security™ :(
