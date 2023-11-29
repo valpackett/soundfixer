@@ -55,6 +55,9 @@ header img {
 	overflow: hidden;
 	max-width: 280px;
 }
+.element-not-playing {
+	opacity: 0.5;
+}
 .checkboxes {
 	display: flex;
 	align-items: center;
