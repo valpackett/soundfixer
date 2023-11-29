@@ -3,6 +3,8 @@
 let tid = 0
 const frameMap = new Map()
 const elementsList = document.getElementById('elements-list')
+const allElements = document.getElementById('all-elements')
+const indivElements = document.getElementById('individual-elements')
 const elementsTpl = document.getElementById('elements-tpl')
 
 function applySettings (fid, elid, newSettings) {
@@ -80,9 +82,10 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 	for (const [fid, els] of frameMap) {
 		for (const [elid, el] of els) {
 			const settings = el.settings || {}
-			const node = document.importNode(elementsTpl.content, true)
-			node.querySelector('li').dataset.fid = fid
-			node.querySelector('li').dataset.elid = elid
+			const node = document.createElement('li')
+			node.appendChild(document.importNode(elementsTpl.content, true))
+			node.dataset.fid = fid
+			node.dataset.elid = elid
 			node.querySelector('.element-label').textContent = `${el.type.charAt(0).toUpperCase() + el.type.slice(1)} in frame ${fid}`
 			const gain = node.querySelector('.element-gain')
 			const gainNumberInput = node.querySelector('.element-gain-num')
@@ -135,10 +138,11 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 		}
 	}
 	if (elCount == 0) {
-		elementsList.innerHTML = '<li>No audio/video found in the current tab. Note that some websites do not work because of cross-domain security restrictions.</li>'
-	}
-	if (elCount > 1) {
-			const node = document.importNode(elementsTpl.content, true)
+			allElements.innerHTML = 'No audio/video found in the current tab. Note that some websites do not work because of cross-domain security restrictions.'
+			indivElements.remove()
+	} else {
+			const node = document.createElement('div')
+			node.appendChild(document.importNode(elementsTpl.content, true))
 			node.querySelector('.element-label').textContent = `All media on the page`
 			const gain = node.querySelector('.element-gain')
 			gain.value = 1
@@ -169,6 +173,6 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 				pan.parentElement.querySelector('.element-pan-num').value = '' + pan.value
 			})
 			node.querySelector('.checkboxes').remove()
-			elementsList.prepend(node)
+			allElements.appendChild(node)
 	}
 })
