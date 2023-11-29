@@ -68,6 +68,7 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 					}
 					result.set(el.getAttribute('data-x-soundfixer-id'), {
 						type: el.tagName.toLowerCase(),
+						isPlaying: (el.currentTime > 0 && !el.paused && !el.ended && el.readyState > 2),
 						settings: el.xSoundFixerSettings
 					})
 				}
@@ -86,7 +87,14 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 			node.appendChild(document.importNode(elementsTpl.content, true))
 			node.dataset.fid = fid
 			node.dataset.elid = elid
-			node.querySelector('.element-label').textContent = `${el.type.charAt(0).toUpperCase() + el.type.slice(1)} in frame ${fid}`
+			node.querySelector('.element-label').textContent = `
+				${el.type.charAt(0).toUpperCase() + el.type.slice(1)}
+				${elCount + 1}
+				${fid ? `in frame ${fid}` : ''}
+				${el.isPlaying ? '' : '(not playing)'}
+			`
+			if (!el.isPlaying)
+				node.querySelector('.element-label').classList.add('element-not-playing')
 			const gain = node.querySelector('.element-gain')
 			const gainNumberInput = node.querySelector('.element-gain-num')
 			gain.value = settings.gain || 1
