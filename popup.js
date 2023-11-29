@@ -156,17 +156,17 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 			})
 			const pan = node.querySelector('.element-pan')
 			pan.value = 0
-			pan.parentElement.querySelector('.element-gain-pan').value = '' + pan.value
+			pan.parentElement.querySelector('.element-pan-num').value = '' + pan.value
 			pan.addEventListener('input', _ => {
 				for (const [fid, els] of frameMap) {
 					for (const [elid, el] of els) {
 						applySettings(fid, elid, { pan: pan.value })
 						const epan = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-pan`)
 						epan.value = pan.value
-						epan.parentElement.querySelector('.element-gain-pan').value = '' + pan.value
+						epan.parentElement.querySelector('.element-pan-num').value = '' + pan.value
 					}
 				}
-				pan.parentElement.querySelector('.element-gain-pan').value = '' + pan.value
+				pan.parentElement.querySelector('.element-pan-num').value = '' + pan.value
 			})
 			node.querySelector('.checkboxes').remove()
 			elementsList.prepend(node)
