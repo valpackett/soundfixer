@@ -84,15 +84,32 @@ label span:first-child {
 label input:not([type=checkbox]) {
 	flex: 1;
 }
-label input[type=number] {
-	flex-grow: 0;
-	width: 7em;
+label input[type=number], .element-reset {
 	background: transparent;
 	color: inherit;
 	border-radius: 5px;
 	border: 1px solid #aaa;
 	padding: .2em .5em;
+}
+label input[type=number] {
+	flex-grow: 0;
+	width: 7em;
 	margin-left: .5em;
+}
+.element-reset:focus {
+	outline: 1px solid;
+}
+.element-reset:active {
+	background: rgba(69, 69, 69, .3);
+}
+.header-row {
+	display: flex;
+	align-content: space-between;
+	align-items: baseline;
+	margin-bottom: .2em;
+}
+.header-row > :first-child {
+	flex: 1;
 }
 
 .info {

@@ -99,7 +99,6 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 			const gainNumberInput = node.querySelector('.element-gain-num')
 			gain.value = settings.gain || 1
 			gain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
-
 			gain.addEventListener('input', function () {
 				// We used a function expression thus gain === this
 				applySettings(fid, elid, { gain: this.value })
@@ -141,6 +140,15 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 			flip.addEventListener('change', _ => {
 				applySettings(fid, elid, { flip: flip.checked })
 			})
+			node.querySelector('.element-reset').onclick = function () {
+				gain.value = 1
+				gain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
+				pan.value = 0
+				pan.parentElement.querySelector('.element-pan-num').value = '' + pan.value
+				mono.checked = false
+				flip.checked = false
+				applySettings(fid, elid, { gain: 1, pan: 0, mono: false, flip: false })
+			}
 			elementsList.appendChild(node)
 			elCount += 1
 		}
@@ -181,6 +189,25 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 				pan.parentElement.querySelector('.element-pan-num').value = '' + pan.value
 			})
 			node.querySelector('.checkboxes').remove()
+			node.querySelector('.element-reset').onclick = function () {
+				gain.value = 1
+				gain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
+				pan.value = 0
+				pan.parentElement.querySelector('.element-pan-num').value = '' + pan.value
+				for (const [fid, els] of frameMap) {
+					for (const [elid, el] of els) {
+						const egain = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-gain`)
+						egain.value = 1
+						egain.parentElement.querySelector('.element-gain-num').value = '' + egain.value
+						const epan = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-pan`)
+						epan.value = 0
+						epan.parentElement.querySelector('.element-pan-num').value = '' + epan.value
+						document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-mono`).checked = false
+						document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-flip`).checked = false
+						applySettings(fid, elid, { gain: 1, pan: 0, mono: false, flip: false })
+					}
+				}
+			}
 			allElements.appendChild(node)
 	}
 })
