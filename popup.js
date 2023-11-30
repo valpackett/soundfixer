@@ -23,10 +23,10 @@ function applySettings (fid, elid, newSettings) {
 			el.xSoundFixerOriginalChannels = el.xSoundFixerContext.destination.channelCount
 		}
 		const newSettings = ${JSON.stringify(newSettings)}
-		if (newSettings.gain) {
+		if ('gain' in newSettings) {
 			el.xSoundFixerGain.gain.value = newSettings.gain
 		}
-		if (newSettings.pan) {
+		if ('pan' in newSettings) {
 			el.xSoundFixerPan.pan.value = newSettings.pan
 		}
 		if ('mono' in newSettings) {
