@@ -161,32 +161,52 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 			node.appendChild(document.importNode(elementsTpl.content, true))
 			node.querySelector('.element-label').textContent = `All media on the page`
 			const gain = node.querySelector('.element-gain')
+			const gainNumberInput = node.querySelector('.element-gain-num')
 			gain.value = 1
-			gain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
-			gain.addEventListener('input', _ => {
+			gainNumberInput.value = '' + gain.value
+			function applyGain (value) {
 				for (const [fid, els] of frameMap) {
 					for (const [elid, el] of els) {
-						applySettings(fid, elid, { gain: gain.value })
+						applySettings(fid, elid, { gain: value })
 						const egain = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-gain`)
-						egain.value = gain.value
-						egain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
+						egain.value = value
+						egain.parentElement.querySelector('.element-gain-num').value = '' + value
 					}
 				}
-				gain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
+				gain.value = value
+				gainNumberInput.value = '' + value
+			}
+			gain.addEventListener('input', _ => applyGain(gain.value))
+			gainNumberInput.addEventListener('input', function () {
+				if (+this.value > +this.getAttribute('max'))
+					this.value = this.getAttribute('max')
+				if (+this.value < +this.getAttribute('min'))
+					this.value = this.getAttribute('min')
+				applyGain(+this.value)
 			})
 			const pan = node.querySelector('.element-pan')
+			const panNumberInput = node.querySelector('.element-pan-num')
 			pan.value = 0
-			pan.parentElement.querySelector('.element-pan-num').value = '' + pan.value
-			pan.addEventListener('input', _ => {
+			panNumberInput.value = '' + pan.value
+			function applyPan (value) {
 				for (const [fid, els] of frameMap) {
 					for (const [elid, el] of els) {
-						applySettings(fid, elid, { pan: pan.value })
+						applySettings(fid, elid, { pan: value })
 						const epan = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-pan`)
-						epan.value = pan.value
-						epan.parentElement.querySelector('.element-pan-num').value = '' + pan.value
+						epan.value = value
+						epan.parentElement.querySelector('.element-pan-num').value = '' + value
 					}
 				}
-				pan.parentElement.querySelector('.element-pan-num').value = '' + pan.value
+				pan.value = value
+				panNumberInput.value = '' + value
+			}
+			pan.addEventListener('input', _ => applyPan(pan.value))
+			panNumberInput.addEventListener('input', function () {
+				if (+this.value > +this.getAttribute('max'))
+					this.value = this.getAttribute('max')
+				if (+this.value < +this.getAttribute('min'))
+					this.value = this.getAttribute('min')
+				applyPan(+this.value)
 			})
 			node.querySelector('.checkboxes').remove()
 			node.querySelector('.element-reset').onclick = function () {
