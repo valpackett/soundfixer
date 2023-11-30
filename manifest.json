@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "SoundFixer",
   "author": "Val Packett",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Lets you fix annoying sound problems in YouTube videos and such. Like audio in one channel only, too quiet or too loud",
   "browser_specific_settings": {
     "gecko": {
