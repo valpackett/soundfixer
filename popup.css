@@ -28,23 +28,23 @@ header img {
 	margin-left: 0.8em;
 	vertical-align: middle;
 }
-#elements-list, #all-elements, .info {
+#elements-list, #all-elements, #individual-elements, .info {
 	background: rgb(250, 250, 250);
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
-#individual-elements {
-	margin: 0;
-	padding: 0.6rem;
-}
-#individual-elements[open] summary {
+#individual-elements summary {
 	margin-bottom: 0.6rem;
 }
-#elements-list li, #all-elements {
+#elements-list li, #all-elements, #individual-elements {
 	margin: 0;
 	padding: 1rem 1rem 0.6rem;
 	border-bottom: 1px solid rgb(235, 235, 235);
+}
+#individual-elements li {
+	padding-left: 0;
+	padding-right: 0;
 }
 #elements-list li:last-child {
 	border-bottom-width: 0;
@@ -84,6 +84,17 @@ label span:first-child {
 label input:not([type=checkbox]) {
 	flex: 1;
 }
+label input[type=number] {
+	flex-grow: 0;
+	width: 7em;
+	background: transparent;
+	color: inherit;
+	border-radius: 5px;
+	border: 1px solid #aaa;
+	padding: .2em .5em;
+	margin-left: .5em;
+}
+
 .info {
 	font-size: 0.8em;
 	color: #666;
@@ -98,17 +109,13 @@ label input:not([type=checkbox]) {
 	header img {
 		filter: invert();
 	}
-	#elements-list, #all-elements, .info {
+	#elements-list, #all-elements, #individual-elements, .info {
 		background: rgb(40, 40, 40);
 	}
-	#elements-list li, #all-elements {
+	#elements-list li, #all-elements, #individual-elements {
 		border-color: rgb(70, 70, 70);
 	}
 	.info {
 		color: #aaa;
 	}
-}
-.element-gain-num,
-.element-pan-num {
-    width: 15%;
 }
