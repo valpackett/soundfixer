@@ -4,7 +4,7 @@
 
 # SoundFixer
 
-![Screenshot](https://addons.mozilla.org/user-media/previews/full/279/279487.png?modified=1677998068)
+![Screenshot](https://addons.mozilla.org/user-media/previews/full/291/291937.png?modified=1701909437)
 
 a WebExtension that lets you fix annoying sound problems on the web (e.g. in YouTube videos): sound in one channel only, too quiet even at maximum volume, too loud even at minimum volume.
 
@@ -15,8 +15,6 @@ a WebExtension that lets you fix annoying sound problems on the web (e.g. in You
 No more "[Plug your headphones only halfway into the jack](https://news.ycombinator.com/item?id=11912213)" :D
 
 (Unfortunately, doesn't work on all websites — specifically, we're not allowed to use the Web Audio API from a cross-domain `<audio>` source. Thankfully, YouTube is not cross-domain!)
-
-(Doesn't seem to work in Chromium/Opera currently because of permission issues. Even when allowing all URLs.)
 
 ## Contributing
 
