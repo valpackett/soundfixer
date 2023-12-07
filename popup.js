@@ -208,12 +208,35 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 					this.value = this.getAttribute('min')
 				applyPan(+this.value)
 			})
-			node.querySelector('.checkboxes').remove()
+			const mono = node.querySelector('.element-mono')
+			mono.checked = false
+			mono.addEventListener('change', _ => {
+				for (const [fid, els] of frameMap) {
+					for (const [elid, el] of els) {
+						applySettings(fid, elid, { mono: mono.checked })
+						const emono = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-mono`)
+						emono.checked = mono.checked
+					}
+				}
+			})
+			const flip = node.querySelector('.element-flip')
+			flip.checked = false
+			flip.addEventListener('change', _ => {
+				for (const [fid, els] of frameMap) {
+					for (const [elid, el] of els) {
+						applySettings(fid, elid, { flip: flip.checked })
+						const eflip = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-flip`)
+						eflip.checked = flip.checked
+					}
+				}
+			})
 			node.querySelector('.element-reset').onclick = function () {
 				gain.value = 1
 				gain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
 				pan.value = 0
 				pan.parentElement.querySelector('.element-pan-num').value = '' + pan.value
+				mono.checked = false
+				flip.checked = false
 				for (const [fid, els] of frameMap) {
 					for (const [elid, el] of els) {
 						const egain = document.querySelector(`[data-fid="${fid}"][data-elid="${elid}"] .element-gain`)
