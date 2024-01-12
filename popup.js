@@ -6,7 +6,32 @@ const elementsList = document.getElementById('elements-list')
 const allElements = document.getElementById('all-elements')
 const indivElements = document.getElementById('individual-elements')
 const elementsTpl = document.getElementById('elements-tpl')
-
+function storageAvailable(type) {
+	let storage;
+	try {
+	  storage = window[type];
+	  const x = "__storage_test__";
+	  storage.setItem(x, x);
+	  storage.removeItem(x);
+	  return true;
+	} catch (e) {
+	  return (
+		e instanceof DOMException &&
+		
+		(e.code === 22 ||
+		  
+		  e.code === 1014 ||
+		 
+		  e.name === "QuotaExceededError" ||
+		  
+		  e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+		
+		storage &&
+		storage.length !== 0
+	  );
+	}
+  }
+  
 function applySettings (fid, elid, newSettings) {
 	return browser.tabs.executeScript(tid, { frameId: fid, code: `(function () {
 		const el = document.querySelector('[data-x-soundfixer-id="${elid}"]')
@@ -149,20 +174,24 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 				flip.checked = false
 				applySettings(fid, elid, { gain: 1, pan: 0, mono: false, flip: false })
 			}
+			
 			elementsList.appendChild(node)
 			elCount += 1
 		}
 	}
 	if (elCount == 0) {
-			allElements.innerHTML = 'No audio/video found in the current tab. Note that some websites do not work because of cross-domain security restrictions.'
+			allElements.innerHTML = 'No audio/video found in the current tab. Note that some websites do not work because of cross-domain security restrictions. ok'
 			indivElements.remove()
 	} else {
+			
 			const node = document.createElement('div')
 			node.appendChild(document.importNode(elementsTpl.content, true))
 			node.querySelector('.element-label').textContent = `All media on the page`
 			const gain = node.querySelector('.element-gain')
 			const gainNumberInput = node.querySelector('.element-gain-num')
-			gain.value = 1
+			
+			
+			
 			gainNumberInput.value = '' + gain.value
 			function applyGain (value) {
 				for (const [fid, els] of frameMap) {
@@ -231,6 +260,7 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 				}
 			})
 			node.querySelector('.element-reset').onclick = function () {
+				browser.storage.local.clear()
 				gain.value = 1
 				gain.parentElement.querySelector('.element-gain-num').value = '' + gain.value
 				pan.value = 0
@@ -251,6 +281,59 @@ browser.tabs.query({ currentWindow: true, active: true }).then(tabs => {
 					}
 				}
 			}
+			node.querySelector('.element-default').onclick = function (){
+				if(storageAvailable("localStorage")){
+					
+					let gainstore=gainNumberInput.value
+					let panstore=panNumberInput.value
+					let monostore=mono.checked
+					let flipstore=flip.checked
+					browser.storage.local.set({"gain":gainstore , "pan":panstore, "mono":monostore,"flip":flipstore})
+				}
+				else{
+					//browser does not support storage very unlikely
+					// idk what to do here
+					alert("Your browser does not support local storage. Please use a different browser or enable local storage.");
+				}
+				
+				
+			}
+			let defaultgain=1
+			let defaultpan=0
+			let defaultmono=false
+			let defaultflip=false
+			// default setting code here 
+			function onGot(item) {
+				
+				if (Object.keys(item).length === 0) {
+					console.log("Storage is empty");
+					gain.value = defaultgain;
+					pan.value= defaultpan
+					mono.checked=defaultmono
+					flip.checked=defaultflip
+					applyPan(pan.value)
+					applyGain(gain.value)
+				} else {
+					gain.value = parseFloat(item["gain"]);
+					pan.value=parseFloat(item["pan"]);
+					mono.checked=item["mono"]
+					flip.checked=item["flip"]
+					applyPan(pan.value)
+					applyGain(gain.value)
+				}
+			  }
+			  
+			function onError(error) {
+				//error setting default value
+				console.log(`Error: ${error}`)
+				//clear storage
+				browser.storage.local.clear()
+				
+			  }
+			let getitem= browser.storage.local.get();
+			getitem.then(onGot).catch(onError).then(
+				()=>console.log("done")
+			);
 			allElements.appendChild(node)
 	}
 })
