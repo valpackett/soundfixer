@@ -102,6 +102,19 @@ label input[type=number] {
 .element-reset:active {
 	background: rgba(69, 69, 69, .3);
 }
+label input[type=number], .element-default {
+	background: transparent;
+	color: inherit;
+	border-radius: 5px;
+	border: 1px solid #aaa;
+	padding: .2em .5em;
+}
+.element-default:focus {
+	outline: 1px solid;
+}
+.element-default:active {
+	background: rgba(69, 69, 69, .3);
+}
 .header-row {
 	display: flex;
 	align-content: space-between;
